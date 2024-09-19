@@ -23,7 +23,7 @@ export default function Home() {
         signOut={logout}
       />
 
-      <div className="flex-1 flex space-x-8 w-full pt-36 pb-8 px-4">
+      <div className="flex-1 flex space-x-8 w-full pt-16 pb-8 px-4">
         <Chat
            isLoading={false}
            handleSubmit={() => {}}
@@ -32,6 +32,11 @@ export default function Home() {
            messages={[]}
         />
         <SideView
+          isLoading={false}
+          selectedTab={"markdown"}
+          onSelectedTabChange={() => {}}
+          result={"test"}
+          artifact={{markdown: "artifact"}}
         />
       </div>
     </main>
