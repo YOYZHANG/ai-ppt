@@ -25,6 +25,11 @@ export default function Home() {
 
       <div className="flex-1 flex space-x-8 w-full pt-36 pb-8 px-4">
         <Chat
+           isLoading={false}
+           handleSubmit={() => {}}
+           input={""}
+           handleInputChange={() => {}}
+           messages={[]}
         />
         <SideView
         />
