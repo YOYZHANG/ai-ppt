@@ -10,15 +10,14 @@ import {
 import { Button } from "@/components/ui/button"
 import { MarkdownView } from './markdown-view'
 import { ArtifactView } from './artifact-view'
+import { ArtifactSchema } from '@/lib/schema'
 
 interface SideViewProps {
   isLoading:boolean,
   selectedTab: 'markdown' | 'artifact'
   onSelectedTabChange: Dispatch<SetStateAction<"markdown" | "artifact">>
   result?: any,
-  artifact?: {
-    markdown: string
-  }
+  artifact?: Partial<ArtifactSchema>
 }
 
 export default function SideView({
@@ -29,10 +28,6 @@ export default function SideView({
   artifact
 
 }: SideViewProps) {
-  if (!artifact) {
-    return null
-  }
-
   return (
     <div className="flex-1 flex flex-col shadow-2xl rounded-lg border max-w-[800px] bg-popover">
       <Tabs
@@ -71,16 +66,20 @@ export default function SideView({
         </div>
 
         <div className="w-full flex-1 flex flex-col items-start justify-start overflow-y-auto">
-          <TabsContent value="code" className="flex-1 w-full">
-            {artifact.markdown &&
-              <MarkdownView md={"testestesteeestset"}/>
-            }
-          </TabsContent>
-          <TabsContent value="artifact" className="flex-1 w-full flex flex-col items-start justify-start">
-            {result &&
-              <ArtifactView/>
-            }
-          </TabsContent>
+          {artifact && (
+            <>
+              <TabsContent value="markdown" className="flex-1 w-full">
+                {artifact.markdown &&
+                  <MarkdownView md={"testestesteeestset"}/>
+                }
+              </TabsContent>
+              <TabsContent value="artifact" className="flex-1 w-full flex flex-col items-start justify-start">
+                {result &&
+                  <ArtifactView/>
+                }
+              </TabsContent>
+            </>
+          )}
         </div>
       </Tabs>
     </div>
