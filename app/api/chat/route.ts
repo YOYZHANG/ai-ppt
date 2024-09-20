@@ -3,7 +3,7 @@ import {
   LanguageModel,
   CoreMessage,
 } from 'ai'
-import { createAnthropic } from '@ai-sdk/anthropic';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
 import ratelimit from '@/lib/ratelimit'
 import { artifactSchema } from '@/lib/schema'
@@ -52,18 +52,17 @@ export async function POST(req: Request) {
     })
   }
 
-  const { messages, userID, config, model } = await req.json() as Req
+  const { messages, userID } = await req.json() as Req
 
   console.log('userID', userID)
-  console.log('config', config)
+  console.log('messages', messages)
 
-  const client = createAnthropic({ apiKey: config.apiKey, baseURL: config.baseURL })('claude-3-5-sonnet-20240620')
+  const client = createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY})('models/gemini-1.5-flash-latest')
 
   const stream = await streamObject({
-    ...config,
     model: client as LanguageModel,
     schema: artifactSchema,
-    system: ``,
+    system: `You are a skilled slidev user and ppt creator. You do not make mistakes. generate a Markdown file using Slidev syntax. `,
     messages
   })
 
