@@ -2,15 +2,15 @@ import { ChangeEvent, FormEvent, useEffect } from 'react'
 import { ArrowUp, Square, Terminal} from 'lucide-react'
 
 import { Input } from '@/components/ui/input'
-import { Message } from '@/lib/messages'
+import { ChatMessage } from '@/lib/messages'
 import { Button } from '@/components/ui/button'
 
 interface ChatProps {
   isLoading: boolean,
-  handleSubmit: (e: FormEvent) => void,
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void,
   input: string
-  handleInputChange: (e: ChangeEvent) => void,
-  messages: Message[]
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void,
+  messages: ChatMessage[]
 }
 
 export default function Chat({
@@ -30,7 +30,7 @@ export default function Chat({
   return (
     <div className="flex-1 flex flex-col gap-4 max-h-full max-w-[800px] mx-auto justify-between">
       <div id="chat-container" className="flex flex-col gap-2 overflow-y-auto max-h-full px-4 rounded-lg">
-        {messages.map((message: Message, index: number) => (
+        {messages.map((message: ChatMessage, index: number) => (
           <div className={`py-2 px-4 shadow-sm whitespace-pre-wrap ${message.role !== 'user' ? 'bg-white/5 border text-muted-foreground' : 'bg-white/20'} rounded-lg font-serif`} key={index}>
             {message.content.map((content, id) => {
               if (content.type === 'text') {
