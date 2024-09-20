@@ -4,18 +4,28 @@ import Chat from '@/components/chat'
 import SideView from '@/components/side-view'
 import NavBar from '@/components/navbar'
 
-// import { AuthViewType, useAuth } from '@/lib/auth'
-import { useState } from 'react'
+import { AuthViewType, useAuth } from '@/lib/auth'
+import { useEffect, useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import { ChatMessage, toAISDKMessages } from '@/lib/messages'
 import { experimental_useObject as useObject } from 'ai/react'
-import {artifactSchema } from '@/lib/schema'
+import {ArtifactSchema, artifactSchema } from '@/lib/schema'
 import { usePostHog } from 'posthog-js/react'
-// import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
+import { AuthDialog } from '@/components/AuthDialog'
+import { ExecutionResult } from './api/sandbox/route'
 
 export default function Home() {
   const posthog = usePostHog()
-  const { submit, isLoading, stop } = useObject({
+  const [currentTab, setCurrentTab] = useState<'markdown' | 'artifact'>('markdown')
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false)
+  const [artifact, setArtifact] = useState<Partial<ArtifactSchema> | undefined>()
+  const [authView, setAuthView] = useState<AuthViewType>('sign_in')
+  const [isAuthDialogOpen, setAuthDialog] = useState(false)
+  const { session, apiKey } = useAuth(setAuthDialog, setAuthView)
+  const [result, setResult] = useState<ExecutionResult>()
+
+  const { object, submit, isLoading, stop } = useObject({
     api: '/api/chat',
     schema: artifactSchema,
     onFinish: async ({ object: artifact, error }) => {
@@ -25,15 +35,41 @@ export default function Home() {
       
       console.log('artifact', artifact)
 
-      // setCurrentTab('artifact')
-      // setIsPreviewLoading(false)
+      const response = await fetch('/api/sandbox', {
+        method: 'POST',
+        body: JSON.stringify({
+          artifact,
+          userID: session?.user?.id,
+          apiKey
+        })
+      })
+
+      const result = await response.json()
+      console.log('result', result)
+      setResult(result)
+      setCurrentTab('artifact')
+      setIsPreviewLoading(false)
     }
   })
 
-  const [isAuthDialogOpen, setAuthDialog] = useState(false)
-  // const { session } = useAuth(setAuthDialog, setAuthView)
+  useEffect(() => {
+    if (object) {
+      console.log(object, 'object in useEffect')
+      setArtifact(object as ArtifactSchema)
+      const lastAssistantMessage = messages.findLast(message => message.role === 'assistant')
+      if (lastAssistantMessage) {
+        lastAssistantMessage.content = [{ type: 'text', text: object.commentary || '' }, { type: 'code', text: object.markdown || '' }]
+        lastAssistantMessage.meta = {
+          title: object.title,
+          description: object.description
+        }
+      }
+    }
+  }, [object])
+
+  
   const logout = () => {
-    // supabase.auth.signOut()
+    supabase.auth.signOut()
   }
 
   const [chatInput, setChatInput] = useLocalStorage('chat', '')
@@ -49,17 +85,22 @@ export default function Home() {
   const handleSubmitAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // if (!session) {
-    //   return setAuthDialog(true)
-    // }
+    if (!session) {
+      return setAuthDialog(true)
+    }
+
+    console.log(session, 'session')
 
     if (isLoading) {
       stop()
     }
 
     const content: ChatMessage['content'] = [{ type: 'text', text: chatInput }]
+
+    console.log(content, 'content')
+    console.log('submit......')
     submit({
-      // userID: session?.user?.id,
+      userID: session?.user?.id,
       messages: toAISDKMessages(addMessage({role: 'user', content})),
     })
 
@@ -69,16 +110,19 @@ export default function Home() {
     })
 
     setChatInput('')
-    // setCurrentTab('code')
-    // setIsPreviewLoading(true)
+    setCurrentTab('markdown')
+    setIsPreviewLoading(true)
 
     posthog.capture('chat_submit')
   }
 
   return (
     <main className="flex min-h-screen max-h-screen">
+      {
+        supabase && <AuthDialog open={isAuthDialogOpen} setOpen={setAuthDialog} view={authView} supabase={supabase} />
+      }
       <NavBar
-        session={null}
+        session={session}
         showLogin={() => setAuthDialog(true)}
         signOut={logout}
       />
@@ -92,11 +136,11 @@ export default function Home() {
            messages={messages}
         />
         <SideView
-          isLoading={false}
-          selectedTab={"markdown"}
-          onSelectedTabChange={() => {}}
-          result={"test"}
-          artifact={{markdown: "artifact"}}
+          isLoading={isPreviewLoading}
+          selectedTab={currentTab}
+          onSelectedTabChange={setCurrentTab}
+          result={result}
+          artifact={artifact}
         />
       </div>
     </main>

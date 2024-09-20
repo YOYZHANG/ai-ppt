@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { Download, LoaderCircle, RotateCw, Copy } from 'lucide-react'
 
 import {
@@ -11,12 +11,13 @@ import { Button } from "@/components/ui/button"
 import { MarkdownView } from './markdown-view'
 import { ArtifactView } from './artifact-view'
 import { ArtifactSchema } from '@/lib/schema'
+import { ExecutionResult } from '@/app/api/sandbox/route'
 
 interface SideViewProps {
   isLoading:boolean,
   selectedTab: 'markdown' | 'artifact'
   onSelectedTabChange: Dispatch<SetStateAction<"markdown" | "artifact">>
-  result?: any,
+  result?: ExecutionResult,
   artifact?: Partial<ArtifactSchema>
 }
 
@@ -28,6 +29,7 @@ export default function SideView({
   artifact
 
 }: SideViewProps) {
+  const [iframeKey, setIframeKey] = useState(0)
   return (
     <div className="flex-1 flex flex-col shadow-2xl rounded-lg border max-w-[800px] bg-popover">
       <Tabs
@@ -70,12 +72,15 @@ export default function SideView({
             <>
               <TabsContent value="markdown" className="flex-1 w-full">
                 {artifact.markdown &&
-                  <MarkdownView md={"testestesteeestset"}/>
+                  <MarkdownView md={artifact.markdown}/>
                 }
               </TabsContent>
               <TabsContent value="artifact" className="flex-1 w-full flex flex-col items-start justify-start">
                 {result &&
-                  <ArtifactView/>
+                  <ArtifactView
+                    iframekey={iframeKey}
+                    result={result}
+                  />
                 }
               </TabsContent>
             </>
