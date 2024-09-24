@@ -1,3 +1,5 @@
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export function MarkdownView({ md }: { md: string }) {
 
@@ -11,7 +13,14 @@ export function MarkdownView({ md }: { md: string }) {
         margin: 0,
       }}
     >
-      <code>{md}</code>
+       <SyntaxHighlighter
+        language="markdown"
+        style={tomorrow}
+        showLineNumbers={true}
+        wrapLines={true}
+      >
+        {md}
+      </SyntaxHighlighter>
     </pre>
   );
 }

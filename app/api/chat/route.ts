@@ -4,6 +4,7 @@ import {
   CoreMessage,
 } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import {SlidevTemplate} from '@/lib/slidev-template'
 
 import ratelimit from '@/lib/ratelimit'
 import { artifactSchema } from '@/lib/schema'
@@ -58,11 +59,11 @@ export async function POST(req: Request) {
   console.log('messages', messages)
 
   const client = createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY})('models/gemini-1.5-flash-latest')
-
+  // You can use the md template: ${SlidevTemplate}
   const stream = await streamObject({
     model: client as LanguageModel,
     schema: artifactSchema,
-    system: `You are a skilled slides markdown generator depending on slidev(https://github.com/slidevjs/slidev.git) format. You do not make mistakes. generate a Markdown file using Slidev syntax. `,
+    system: `generate a Markdown file using Slidev syntax. `,
     messages
   })
 
