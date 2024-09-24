@@ -1,0 +1,10 @@
+@baseUri = http://127.0.0.1:3000/api 
+
+POST {{baseUri}}/sandbox
+Content-Type: application/json
+
+{
+    "artifact": {
+      "markdown": "#title"
+    }
+}
