@@ -29,9 +29,12 @@ export default function SideView({
   artifact
 
 }: SideViewProps) {
-  console.log('refresh!!!!!')
-  console.log(result, 'result????')
   const [iframeKey, setIframeKey] = useState(0)
+
+  if (!artifact) {
+    return null
+  }
+
   return (
     <div className="flex-1 flex flex-col shadow-2xl rounded-lg border max-w-[800px] bg-popover">
       <Tabs

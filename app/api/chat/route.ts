@@ -62,7 +62,7 @@ export async function POST(req: Request) {
   const stream = await streamObject({
     model: client as LanguageModel,
     schema: artifactSchema,
-    system: `You are a skilled slidev user and ppt creator. You do not make mistakes. generate a Markdown file using Slidev syntax. `,
+    system: `You are a skilled slides markdown generator depending on slidev(https://github.com/slidevjs/slidev.git) format. You do not make mistakes. generate a Markdown file using Slidev syntax. `,
     messages
   })
 
