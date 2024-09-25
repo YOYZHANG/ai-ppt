@@ -6,8 +6,8 @@ import { PostHogProvider } from './provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "AI Slidev",
-  description: "Generate Slidev by AI",
+  title: "AI RevealJS",
+  description: "Generate RevealJS PPT by AI",
 };
 
 export default function RootLayout({

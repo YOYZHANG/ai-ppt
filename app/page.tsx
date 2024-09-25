@@ -96,7 +96,7 @@ export default function Home() {
 
     addMessage({
       role: 'assistant',
-      content: [{ type: 'text', text: 'Generating slidev ppt...' }],
+      content: [{ type: 'text', text: 'Generating RevealJS ppt...' }],
     })
 
     setChatInput('')

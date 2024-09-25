@@ -4,7 +4,7 @@ import {
   CoreMessage,
 } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import {htmlTemplate} from '@/lib/slidev-template'
+import {htmlTemplate} from '@/lib/template'
 
 import ratelimit from '@/lib/ratelimit'
 import { artifactSchema } from '@/lib/schema'
@@ -60,7 +60,12 @@ export async function POST(req: Request) {
   const stream = await streamObject({
     model: client as LanguageModel,
     schema: artifactSchema,
-    system: `generate sections code using revealjs syntax.you make no mistakes.use the template: ${htmlTemplate}`,
+    system: `
+      Generate a visually appealing reveal.js presentation in HTML.
+      you make no mistakes.
+      The presentation should include the following slides: title, content types like bullet points, images, code.
+      use the template: ${htmlTemplate}
+    `,
     messages
   })
 
