@@ -1,3 +1,4 @@
+// deporated
 import { ArtifactSchema } from '@/lib/schema'
 import { Sandbox, Result } from "@e2b/code-interpreter";
 
@@ -14,14 +15,18 @@ export type ExecutionResult = {
 }
 
 export async function POST(req: Request) {
+  console.log('begin')
   const { artifact, userID, apiKey }: { artifact: ArtifactSchema, userID: string, apiKey: string } = await req.json()
 
   const sbx =  await Sandbox.create(templateId, { metadata: { template: templateId, userID: userID }, timeoutMs: sandboxTimeout, apiKey })
-  if (artifact.markdown) {
-    await sbx.files.write(filePath, artifact.markdown)
-  }
+  if (artifact.code) {
+    console.log(artifact.code, 'artifact.markdown')
+    await sbx.files.write(filePath, artifact.code)
+  } 
 
-
+  console.log(JSON.stringify({
+    url: `https://${sbx?.getHost(3030)}`
+  }))
   return new Response(JSON.stringify({
     url: `https://${sbx?.getHost(3030)}`
   }))

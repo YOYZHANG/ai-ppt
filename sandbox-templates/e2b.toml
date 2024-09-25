@@ -10,7 +10,7 @@
 # const sandbox = await Sandbox.create({ template: 'my-slidev-developer' })
 
 team_id = "df0c5b73-b47c-431e-a90c-9a32db676fb3"
-start_cmd = ""
+start_cmd = "cd /home/user && npx slidev"
 dockerfile = "e2b.Dockerfile"
 template_name = "my-slidev-developer"
 template_id = "toyw6mhmdw42n4wyhdcb"

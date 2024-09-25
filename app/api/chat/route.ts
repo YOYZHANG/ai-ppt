@@ -4,7 +4,7 @@ import {
   CoreMessage,
 } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import {SlidevTemplate} from '@/lib/slidev-template'
+import {htmlTemplate} from '@/lib/slidev-template'
 
 import ratelimit from '@/lib/ratelimit'
 import { artifactSchema } from '@/lib/schema'
@@ -30,14 +30,12 @@ export type LLMModelConfig = {
 
 export const maxDuration = 60
 
-const rateLimitMaxRequests = 5
+const rateLimitMaxRequests = 500
 const ratelimitWindow = '1m'
 
 interface Req {
   messages: CoreMessage[],
   userID: string,
-  model: LLMModel,
-  config: LLMModelConfig
 }
 
 export async function POST(req: Request) {
@@ -59,11 +57,10 @@ export async function POST(req: Request) {
   console.log('messages', messages)
 
   const client = createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY})('models/gemini-1.5-flash-latest')
-  // You can use the md template: ${SlidevTemplate}
   const stream = await streamObject({
     model: client as LanguageModel,
     schema: artifactSchema,
-    system: `generate a Markdown file using Slidev syntax. `,
+    system: `generate sections code using revealjs syntax.you make no mistakes.use the template: ${htmlTemplate}`,
     messages
   })
 

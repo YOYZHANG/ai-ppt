@@ -21,7 +21,7 @@ export function ArtifactView({
         className="h-full w-full"
         sandbox="allow-forms allow-scripts allow-same-origin"
         loading="lazy"
-        src={result.url}
+        src= {result.url}
       />
     </div>
   )

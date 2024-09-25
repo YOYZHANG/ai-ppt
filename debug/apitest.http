@@ -1,10 +1,29 @@
-@baseUri = http://127.0.0.1:3000/api 
+@baseUri = http://127.0.0.1:3003/api 
 
 POST {{baseUri}}/sandbox
 Content-Type: application/json
 
 {
     "artifact": {
-      "markdown": "#title"
+      "code": "#title"
     }
 }
+
+POST {{baseUri}}/chat
+Content-Type: application/json
+
+{
+    "messages": [{
+      "role": "user",
+      "content": [{ "type": "text", "text": "introduce slidev" }]
+    }]
+}
+
+POST {{baseUri}}/convertd
+
+{
+    "artifact": {
+     "code": "#title"
+    }
+}
+

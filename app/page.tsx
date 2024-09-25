@@ -17,7 +17,7 @@ import { ExecutionResult } from './api/sandbox/route'
 
 export default function Home() {
   const posthog = usePostHog()
-  const [currentTab, setCurrentTab] = useState<'markdown' | 'artifact'>('markdown')
+  const [currentTab, setCurrentTab] = useState<'code' | 'artifact'>('code')
   const [isPreviewLoading, setIsPreviewLoading] = useState(false)
   const [artifact, setArtifact] = useState<Partial<ArtifactSchema> | undefined>()
   const [authView, setAuthView] = useState<AuthViewType>('sign_in')
@@ -33,12 +33,10 @@ export default function Home() {
         return
       }
 
-      const response = await fetch('/api/sandbox', {
+      const response = await fetch('/api/convertd', {
         method: 'POST',
         body: JSON.stringify({
-          artifact,
-          userID: session?.user?.id,
-          apiKey
+          artifact
         })
       })
 
@@ -51,11 +49,10 @@ export default function Home() {
 
   useEffect(() => {
     if (object) {
-      console.log(object, 'object in useEffect')
       setArtifact(object as ArtifactSchema)
       const lastAssistantMessage = messages.findLast(message => message.role === 'assistant')
       if (lastAssistantMessage) {
-        lastAssistantMessage.content = [{ type: 'text', text: object.commentary || '' }, { type: 'code', text: object.markdown || '' }]
+        lastAssistantMessage.content = [{ type: 'text', text: object.commentary || '' }, { type: 'code', text: object.code || '' }]
         lastAssistantMessage.meta = {
           title: object.title,
           description: object.description
@@ -86,16 +83,12 @@ export default function Home() {
       return setAuthDialog(true)
     }
 
-    console.log(session, 'session')
-
     if (isLoading) {
       stop()
     }
 
     const content: ChatMessage['content'] = [{ type: 'text', text: chatInput }]
 
-    console.log(content, 'content')
-    console.log('submit......')
     submit({
       userID: session?.user?.id,
       messages: toAISDKMessages(addMessage({role: 'user', content})),
@@ -107,7 +100,7 @@ export default function Home() {
     })
 
     setChatInput('')
-    setCurrentTab('markdown')
+    setCurrentTab('code')
     setIsPreviewLoading(true)
 
     posthog.capture('chat_submit')

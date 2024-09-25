@@ -15,8 +15,8 @@ import { ExecutionResult } from '@/app/api/sandbox/route'
 
 interface SideViewProps {
   isLoading:boolean,
-  selectedTab: 'markdown' | 'artifact'
-  onSelectedTabChange: Dispatch<SetStateAction<"markdown" | "artifact">>
+  selectedTab: 'code' | 'artifact'
+  onSelectedTabChange: Dispatch<SetStateAction<"code" | "artifact">>
   result?: ExecutionResult,
   artifact?: Partial<ArtifactSchema>
 }
@@ -39,7 +39,7 @@ export default function SideView({
     <div className="flex-1 flex flex-col shadow-2xl rounded-lg border max-w-[800px] bg-popover">
       <Tabs
         value={selectedTab}
-        onValueChange={(value) => onSelectedTabChange(value as 'markdown' | 'artifact')}
+        onValueChange={(value) => onSelectedTabChange(value as 'code' | 'artifact')}
         className="h-full max-h-full overflow-hidden flex flex-col items-start justify-start"
       >
         <div className="w-full p-2 grid grid-cols-3 items-center justify-end rounded-t-lg border-b">
@@ -49,7 +49,7 @@ export default function SideView({
 
           <div className='flex justify-center'>
             <TabsList className="px-1 py-0 border h-8">
-              <TabsTrigger className="font-normal text-xs py-1 px-2" value="markdown">Markdown</TabsTrigger>
+              <TabsTrigger className="font-normal text-xs py-1 px-2" value="code">code</TabsTrigger>
               <TabsTrigger disabled={!result} className="font-normal text-xs py-1 px-2" value="artifact">Preview</TabsTrigger>
             </TabsList>
           </div>
@@ -75,9 +75,9 @@ export default function SideView({
         <div className="w-full flex-1 flex flex-col items-start justify-start overflow-y-auto">
           {artifact && (
             <>
-              <TabsContent value="markdown" className="flex-1 w-full">
-                {artifact.markdown &&
-                  <MarkdownView md={artifact.markdown}/>
+              <TabsContent value="code" className="flex-1 w-full">
+                {artifact.code &&
+                  <MarkdownView content={artifact.code}/>
                 }
               </TabsContent>
               <TabsContent value="artifact" className="flex-1 w-full flex flex-col items-start justify-start">
