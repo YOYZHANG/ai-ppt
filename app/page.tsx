@@ -14,6 +14,7 @@ import { usePostHog } from 'posthog-js/react'
 import { supabase } from '@/lib/supabase'
 import { AuthDialog } from '@/components/auth-dialog'
 import { ExecutionResult } from './api/sandbox/route'
+import { PriceDialog } from '@/components/price-dialog'
 
 export default function Home() {
   const posthog = usePostHog()
@@ -22,6 +23,7 @@ export default function Home() {
   const [artifact, setArtifact] = useState<Partial<ArtifactSchema> | undefined>()
   const [authView, setAuthView] = useState<AuthViewType>('sign_in')
   const [isAuthDialogOpen, setAuthDialog] = useState(false)
+  const [isPriceDialogOpen, setPriceDialogOpen] = useState(false)
   const { session, apiKey } = useAuth(setAuthDialog, setAuthView)
   const [result, setResult] = useState<ExecutionResult>()
 
@@ -108,13 +110,16 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen max-h-screen">
-      {
-        supabase && <AuthDialog open={isAuthDialogOpen} setOpen={setAuthDialog} view={authView} supabase={supabase} />
+      {<>
+        <AuthDialog open={isAuthDialogOpen} setOpen={setAuthDialog} view={authView} supabase={supabase} />
+        <PriceDialog open={isPriceDialogOpen} setOpen={setPriceDialogOpen}></PriceDialog>
+      </>
       }
       <NavBar
         session={session}
         showLogin={() => setAuthDialog(true)}
         signOut={logout}
+        showPrice={() => setPriceDialogOpen(true)}
       />
 
       <div className="flex-1 flex space-x-8 w-full pt-16 pb-8 px-4">

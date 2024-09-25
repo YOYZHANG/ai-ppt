@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react'
-import { ArrowUp, Square, Terminal} from 'lucide-react'
+import { ArrowUp, Square, Sparkles,Terminal, BadgeDollarSign} from 'lucide-react'
+
 
 import { Input } from '@/components/ui/input'
 import { ChatMessage } from '@/lib/messages'
@@ -18,7 +19,7 @@ export default function Chat({
   input,
   messages,
   handleInputChange,
-  handleSubmit
+  handleSubmit,
 }: ChatProps) {
   useEffect(() => {
     const chatContainer = document.getElementById('chat-container')
@@ -56,16 +57,28 @@ export default function Chat({
         ))}
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <div className='flex items-center text-center text-xs font-normal ml-3'>
+            <span className='text-[#696969]'>Credit cost:   </span>
+            <img alt="credit Icon" loading="lazy" width="12" height="12" decoding="async" className="ml-4 mr-1 inline-flex" src="/money-icon.webp"></img>
+            <span className="mr-1 text-label-base">5</span>
+            <span className='text-label-base'>credits</span>
+        </div>
         <form onSubmit={handleSubmit} className="flex flex-row gap-2 items-center">
-          <Input className="ring-0 rounded-xl" required={true} placeholder="Describe your ppt..." value={input} onChange={handleInputChange}/>
+          <Input
+            className="focus:outline-none"
+            required={true}
+            placeholder="eg: Introduce langchain.js"
+            value={input}
+            onChange={handleInputChange}
+          />
           { !isLoading ? (
               <Button variant="secondary" size="icon" className='rounded-full h-10 w-11'>
-                <ArrowUp className="h-5 w-5" />
+                <Sparkles className="h-5 w-5 text-[#c5f955]" />
               </Button>
           ) : (
               <Button variant="secondary" size="icon" className='rounded-full h-10 w-11' onClick={(e) => { e.preventDefault(); stop() }}>
-                <Square className="h-5 w-5" />
+                <Square className="h-5 w-5 text-[#c5f955]" />
               </Button>
             )
           }

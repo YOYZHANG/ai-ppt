@@ -30,7 +30,7 @@ export type LLMModelConfig = {
 
 export const maxDuration = 60
 
-const rateLimitMaxRequests = 500
+const rateLimitMaxRequests = 5
 const ratelimitWindow = '1m'
 
 interface Req {
@@ -62,8 +62,8 @@ export async function POST(req: Request) {
     schema: artifactSchema,
     system: `
       Generate a visually appealing reveal.js presentation in HTML.
-      you make no mistakes.
-      The presentation should include the following slides: title, content types like bullet points, images, code.
+      The presentation should include the following slides: title, content types like bullet points.
+      Each slide should better contains images, texts with custom styles.
       use the template: ${htmlTemplate}
     `,
     messages

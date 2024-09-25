@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from 'next/font/google'
 import { PostHogProvider } from './provider'
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <PostHogProvider>
         <body className={inter.className}>
+          <ToastContainer theme="dark"/>
           {children}
         </body>
       </PostHogProvider>
