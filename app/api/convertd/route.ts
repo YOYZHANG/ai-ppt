@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export async function POST(req) {
+export async function POST(req: Request) {
   const { artifact} = await req.json()
 
     const fileName = `ppt_${Date.now()}.html`;
