@@ -3,7 +3,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog"
-import AuthForm from "./AuthForm"
+import AuthForm from "./auth-form"
 import { SupabaseClient } from "@supabase/supabase-js"
 import { AuthViewType } from "@/lib/auth"
 

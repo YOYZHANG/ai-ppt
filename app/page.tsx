@@ -12,7 +12,7 @@ import { experimental_useObject as useObject } from 'ai/react'
 import {ArtifactSchema, artifactSchema } from '@/lib/schema'
 import { usePostHog } from 'posthog-js/react'
 import { supabase } from '@/lib/supabase'
-import { AuthDialog } from '@/components/AuthDialog'
+import { AuthDialog } from '@/components/auth-dialog'
 import { ExecutionResult } from './api/sandbox/route'
 
 export default function Home() {
