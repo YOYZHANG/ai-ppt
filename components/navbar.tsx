@@ -2,8 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Separator } from '@/components/ui/separator'
 import { Button } from './ui/button'
-import { LogOut } from 'lucide-react'
+import { LogOut,  Github, Twitter} from 'lucide-react'
 import { Session } from '@supabase/supabase-js'
+import { User } from '@/components/user'
 
 interface NavBarProps {
   session: Session | null
@@ -29,23 +30,19 @@ export default function NavBar({session, signOut, showLogin, showPrice}: NavBarP
           </Button>
           <Button variant="secondary" className='text-[#c5f955]' onClick={showPrice}>
             <span className="flex items-center h-5 w-5">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.232 2.287A.75.75 0 0 1 13.75 3v6.25H19a.75.75 0 0 1 .607 1.191l-8 11a.75.75 0 0 1-1.357-.44v-6.25H5a.75.75 0 0 1-.607-1.192l8-11a.75.75 0 0 1 .839-.272Z" fill="currentColor"></path></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"><path fillRule="evenodd" clipRule="evenodd" d="M13.232 2.287A.75.75 0 0 1 13.75 3v6.25H19a.75.75 0 0 1 .607 1.191l-8 11a.75.75 0 0 1-1.357-.44v-6.25H5a.75.75 0 0 1-.607-1.192l8-11a.75.75 0 0 1 .839-.272Z" fill="currentColor"></path></svg>
             </span>
             <span>Get Gredits</span>
           </Button>
           <Separator orientation="vertical" />
-          {session ? (
-            <div className="flex items-center">
-              <span className="text-sm font-medium">{session.user.email}</span>
-              <Button variant="link" size="icon" onClick={signOut}>
-                <LogOut className="h-4 w-4" />
-              </Button>
-            </div>
-          ) : (
-            <Button variant="default" size="icon" className="text-sm font-medium px-8 py-2" onClick={showLogin}>
-              Sign in
-            </Button>
-          )}
+          <Button variant="ghost" className='rounded-md px-0 mx-0 text-muted-foreground h-full'>
+            <a href="https://github.com/" target="_blank"><Github className="text-sm w-5 h-5" /></a>
+          </Button>
+          <Button variant="ghost" className='rounded-md px-0 mx-0 text-muted-foreground h-full'>
+            <a href="https://github.com/" target="_blank"><Twitter className="text-sm w-5 h-5" /></a>
+          </Button>
+          <Separator orientation="vertical" />
+          <User session={session} signOut={signOut} showLogin={showLogin}></User>
         </div>
       </div>
     </nav>
