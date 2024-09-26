@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from './ui/textarea';
 
 const Lint = [
-  "Create a 5-slide presentation on the impact of AI in healthcare, covering key benefits, challenges, and future trends.",
-  "Generate a professional PPT on the topic of climate change, with slides on causes, effects, and potential solutions.",
-  "Design a creative presentation about space exploration history, including major missions, milestones, and future goals"
+  "Create a PPT on how ChatGPT works, use cases, and limitations.",
+  "Generate a PPT explaining the API integration of ChatGPT in web applications, including key steps and practical examples.",
+  "Compares ChatGPT with other conversational AI models, such as Gemini, in terms of architecture and performance."
 ]
 
 interface Props {
@@ -20,7 +20,6 @@ interface Props {
 export default function Welcome({onSubmit, onChange, value, setChatInput}: Props) {
   const handleClick = (lint: string) => {
     setChatInput(lint)
-    onSubmit()
   }
   return (
     <div className="max-w-2xl mx-auto p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl mt-[150px]">
@@ -49,7 +48,7 @@ export default function Welcome({onSubmit, onChange, value, setChatInput}: Props
       <div>
         <form className="relative" onSubmit={onSubmit}>
           <Textarea
-            className="w-full p-3 text-white bg-black border rounded-lg resize-none focus-visible:outline-none"
+            className="w-full p-[20px] pr-[50px] text-white bg-black border rounded-lg resize-none focus-visible:outline-none"
             rows={7}
             value={value}
             onChange={onChange}

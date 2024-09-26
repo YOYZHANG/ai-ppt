@@ -39,20 +39,7 @@ interface Req {
 }
 
 export async function POST(req: Request) {
-  const limit = await ratelimit(req.headers.get('x-forwarded-for'), rateLimitMaxRequests, ratelimitWindow)
-
-  if (limit && !limit?.success) {
-    return new Response('You have reached your request limit for the day.', {
-      status: 429,
-      headers: {
-        'X-RateLimit-Limit': limit.amount.toString(),
-        'X-RateLimit-Remaining': limit.remaining.toString(),
-        'X-RateLimit-Reset': limit.reset.toString()
-      }
-    })
-  }
-
-  const { messages, userID } = await req.json() as Req
+  const { messages } = await req.json() as Req
 
   const client = createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY})('models/gemini-1.5-flash-latest')
   const stream = await streamObject({
@@ -60,7 +47,8 @@ export async function POST(req: Request) {
     schema: artifactSchema,
     system: `
       Generate a visually appealing reveal.js presentation in HTML.
-      The presentation should include the following slides: cover with image, content types like bullet points with images and code, conclusion, Q&A and end page.
+      The presentation should include the following slides: appealing cover, bullet points with links, conclusion and end page.
+      more than 6 slides. slides can use fit css style and animate effect.
       use the template: ${htmlTemplate}
     `,
     messages

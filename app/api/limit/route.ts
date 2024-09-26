@@ -2,7 +2,7 @@ import ratelimit from '@/lib/ratelimit'
 
 export const maxDuration = 60
 
-const rateLimitMaxRequests = 1
+const rateLimitMaxRequests = 10
 const ratelimitWindow = '1d'
 
 
