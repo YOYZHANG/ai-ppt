@@ -40,7 +40,8 @@ interface Req {
 
 export async function POST(req: Request) {
   const limit = await ratelimit(req.headers.get('x-forwarded-for'), rateLimitMaxRequests, ratelimitWindow)
-  if (limit) {
+
+  if (limit && !limit?.success) {
     return new Response('You have reached your request limit for the day.', {
       status: 429,
       headers: {
@@ -62,8 +63,7 @@ export async function POST(req: Request) {
     schema: artifactSchema,
     system: `
       Generate a visually appealing reveal.js presentation in HTML.
-      The presentation should include the following slides: title, content types like bullet points.
-      Each slide should better contains images, texts with custom styles.
+      The presentation should include the following slides: cover with image, content types like bullet points with images and code, conclusion, Q&A and end page.
       use the template: ${htmlTemplate}
     `,
     messages

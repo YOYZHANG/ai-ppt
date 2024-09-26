@@ -12,6 +12,7 @@ import { CodeView } from './code-view'
 import { ArtifactView } from './artifact-view'
 import { ArtifactSchema } from '@/lib/schema'
 import { ExecutionResult } from '@/app/api/sandbox/route'
+import { toast } from 'react-toastify'
 
 interface SideViewProps {
   isLoading:boolean,
@@ -42,10 +43,10 @@ export default function SideView({
   function copy (content: string) {
     navigator.clipboard.writeText(content)
       .then(() => {
-        alert('Copied to clipboard')
+        toast('Copied to clipboard')
       })
       .catch(err => {
-        alert('Failed to copy: ' + content)
+        toast.error('Failed to copy: ' + content)
       })
   }
 
@@ -90,7 +91,7 @@ export default function SideView({
                 <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Copy URL' onClick={() => copy(artifact.code || '')}>
                   <Copy className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Refresh' onClick={() => share(result.url)}>
+                <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Share' onClick={() => share(result.url)}>
                   <Share2 className="h-4 w-4" />
                 </Button>
               </>

@@ -15,12 +15,11 @@ export default async function ratelimit (key: string | null, maxRequests: number
       `ratelimit_${key}`
     )
 
-    if (!success) {
-      return {
-        amount: limit,
-        reset,
-        remaining
-      }
+    return {
+      amount: limit,
+      reset,
+      remaining,
+      success
     }
   }
 }

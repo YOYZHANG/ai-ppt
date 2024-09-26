@@ -1,4 +1,9 @@
-@baseUri = http://127.0.0.1:3003/api 
+@baseUri = http://127.0.0.1:3000/api 
+
+GET {{baseUri}}/limit
+Content-Type: application/json
+
+{}
 
 POST {{baseUri}}/sandbox
 Content-Type: application/json

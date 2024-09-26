@@ -23,13 +23,13 @@ export function User({ session, signOut, showLogin }: Props) {
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">
-            <AvatarImage src={`https://api.dicebear.com/9.x/adventurer/svg`}/>
-            <AvatarFallback>{session.user.email}</AvatarFallback>
+            <AvatarImage src={session.user?.user_metadata?.avatar_url}/>
+            <AvatarFallback>{session.user.user_metadata.name}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mx-4">
           <DropdownMenuLabel className="text-center truncate">
-            {session.user.email}
+            {session.user.user_metadata.name}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel className="text-center truncate">
