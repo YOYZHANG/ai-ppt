@@ -15,6 +15,7 @@ import { supabase } from '@/lib/supabase'
 import { AuthDialog } from '@/components/auth-dialog'
 import { ExecutionResult } from './api/sandbox/route'
 import { PriceDialog } from '@/components/price-dialog'
+import { toast } from 'react-toastify'
 
 export default function Home() {
   const posthog = usePostHog()
@@ -68,8 +69,21 @@ export default function Home() {
     supabase.auth.signOut()
   }
 
+  const checkLimit = async (): Promise<boolean> => {
+    const res = await fetch('/api/limit', {
+      method: 'GET',
+    });
+
+    if (res.status === 429) {
+      toast.error('You have reached your request limit for the day')
+      return true
+    }
+
+    return false
+  }
+
   const [chatInput, setChatInput] = useLocalStorage('chat', '')
-  const handleSaveInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSaveInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setChatInput(e.target.value)
   }
 
@@ -78,15 +92,21 @@ export default function Home() {
     setMessages(previousMessages => [...previousMessages, message])
     return [...messages, message]
   }
-  const handleSubmitAuth = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmitAuth = async (e?: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault()
 
     if (!session) {
       return setAuthDialog(true)
     }
 
+
     if (isLoading) {
       stop()
+    }
+
+    const limited = await checkLimit()
+    if (limited) {
+      return
     }
 
     const content: ChatMessage['content'] = [{ type: 'text', text: chatInput }]
@@ -127,6 +147,7 @@ export default function Home() {
            isLoading={isLoading}
            handleSubmit={handleSubmitAuth}
            input={chatInput}
+           setChatInput={setChatInput}
            handleInputChange={handleSaveInputChange}
            messages={messages}
         />
