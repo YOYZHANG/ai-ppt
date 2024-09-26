@@ -20,7 +20,7 @@ export default function NavBar({session, signOut, showLogin, showPrice}: NavBarP
         <div className="flex flex-1 items-center">
           <Link href="/" className="flex items-center gap-2" target="_blank">
             <Image src="/logo.svg" alt="logo" width={24} height={24}/>
-            <h1 className="whitespace-pre ml-2">RevealJS AI </h1>
+            <h1 className="whitespace-pre ml-2 font-weight-700">RevealJS AI </h1>
           </Link>
         </div>
         <div className="flex justify-end space-x-4">
