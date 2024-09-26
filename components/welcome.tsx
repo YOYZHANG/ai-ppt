@@ -50,7 +50,7 @@ export default function Welcome({onSubmit, onChange, value, setChatInput}: Props
         <form className="relative" onSubmit={onSubmit}>
           <Textarea
             className="w-full p-3 text-white bg-black border rounded-lg resize-none focus-visible:outline-none"
-            rows={4}
+            rows={7}
             value={value}
             onChange={onChange}
             placeholder="Describe your topic..."
@@ -70,7 +70,7 @@ export default function Welcome({onSubmit, onChange, value, setChatInput}: Props
           {Lint.map((example, index) => (
             <button 
               key={index} 
-              className="px-4 py-2 bg-black rounded-full text-sm text-gray-500 hover:bg-gray-600 hover:text-gray-300 transition-all duration-300 hover:shadow-md text-left"
+              className="px-4 py-2 bg-black rounded-full text-sm text-gray-500 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 hover:shadow-md text-left"
               onClick={() => handleClick(example)}
             >
               {example}
