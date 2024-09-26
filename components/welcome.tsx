@@ -13,7 +13,7 @@ const Lint = [
 
 interface Props {
   onSubmit: (e?: FormEvent<HTMLFormElement>) => void
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+  onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
   setChatInput: (input: string) => void
   value: string
 }

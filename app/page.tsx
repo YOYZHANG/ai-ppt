@@ -83,7 +83,7 @@ export default function Home() {
   }
 
   const [chatInput, setChatInput] = useLocalStorage('chat', '')
-  const handleSaveInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleSaveInputChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setChatInput(e.target.value)
   }
 

@@ -12,7 +12,6 @@ interface ChatProps {
   input: string
   handleInputChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
   messages: ChatMessage[]
-  limit: string
 }
 
 export default function Chat({
@@ -20,7 +19,6 @@ export default function Chat({
   input,
   setChatInput,
   messages,
-  limit,
   handleInputChange,
   handleSubmit,
 }: ChatProps) {

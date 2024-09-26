@@ -54,9 +54,6 @@ export async function POST(req: Request) {
 
   const { messages, userID } = await req.json() as Req
 
-  console.log('userID', userID)
-  console.log('messages', messages)
-
   const client = createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY})('models/gemini-1.5-flash-latest')
   const stream = await streamObject({
     model: client as LanguageModel,
