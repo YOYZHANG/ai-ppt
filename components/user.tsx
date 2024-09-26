@@ -33,7 +33,7 @@ export function User({ session, signOut, showLogin }: Props) {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel className="text-center truncate">
-            <Button variant="ghost" size="icon" className="w-full h-full text-sm font-medium" onClick={showLogin}>
+            <Button variant="ghost" size="icon" className="w-full h-full text-sm font-medium justify-start hover:text-gray-400" onClick={showLogin}>
               Sign Out
             </Button>
           </DropdownMenuLabel>

@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Separator } from '@/components/ui/separator'
 import { Button } from './ui/button'
-import { Github, Twitter} from 'lucide-react'
 import { Session } from '@supabase/supabase-js'
 import { User } from '@/components/user'
+import { BsGithub, BsTwitterX } from "react-icons/bs";
 
 interface NavBarProps {
   session: Session | null,
@@ -20,7 +20,7 @@ export default function NavBar({session, signOut, showLogin, showPrice}: NavBarP
         <div className="flex flex-1 items-center">
           <Link href="/" className="flex items-center gap-2" target="_blank">
             <Image src="/logo.svg" alt="logo" width={24} height={24}/>
-            <h1 className="whitespace-pre ml-2 font-weight-700">RevealJS AI </h1>
+            <h1 className="whitespace-pre ml-2 font-bold">RevealJS AI </h1>
           </Link>
         </div>
         <div className="flex justify-end space-x-4">
@@ -32,10 +32,10 @@ export default function NavBar({session, signOut, showLogin, showPrice}: NavBarP
           </Button>
           <Separator orientation="vertical" />
           <Button variant="ghost" className='rounded-md px-0 mx-0 text-muted-foreground h-full'>
-            <a href="https://github.com/" target="_blank"><Github className="text-sm w-5 h-5" /></a>
+            <a href="https://github.com/YOYZHANG/ai-ppt" target="_blank"><BsGithub className="text-sm w-5 h-5" /></a>
           </Button>
           <Button variant="ghost" className='rounded-md px-0 mx-0 text-muted-foreground h-full'>
-            <a href="https://github.com/" target="_blank"><Twitter className="text-sm w-5 h-5" /></a>
+            <a href="https://x.com/alexu19049062" target="_blank"><BsTwitterX className="text-sm w-5 h-5" /></a>
           </Button>
           <Separator orientation="vertical" />
           <User session={session} signOut={signOut} showLogin={showLogin}></User>

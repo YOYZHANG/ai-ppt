@@ -11,7 +11,7 @@ export function AuthDialog({ open, setOpen, supabase, view }: { open: boolean, s
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
-        <DialogTitle>Sign in</DialogTitle>
+        <DialogTitle></DialogTitle>
         <AuthForm supabase={supabase} view={view} />
       </DialogContent>
     </Dialog>
