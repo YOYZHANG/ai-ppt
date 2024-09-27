@@ -46,7 +46,7 @@ export default function Welcome({onSubmit, onChange, value, setChatInput}: Props
                 Type the Topic for your Presentation, 
               </span>
               <span  className='relative'>
-                It's Free!
+                It is Free!
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 418 42"
