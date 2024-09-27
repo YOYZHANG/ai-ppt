@@ -1,12 +1,12 @@
 'use client'
 
-import React, { FormEvent, ChangeEvent } from 'react';
+import React, { FormEvent, ChangeEvent, useEffect } from 'react';
 import { Sparkles, Presentation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from './ui/textarea';
 
 const Lint = [
-  "Create a PPT on how ChatGPT works, use cases, and limitations.",
+  "Create a PPT on how ChatGPT works and limitations.",
   "Generate a PPT explaining the API integration of ChatGPT in web applications, including key steps and practical examples.",
   "Compares ChatGPT with other conversational AI models, such as Gemini, in terms of architecture and performance."
 ]
@@ -21,6 +21,21 @@ export default function Welcome({onSubmit, onChange, value, setChatInput}: Props
   const handleClick = (lint: string) => {
     setChatInput(lint)
   }
+
+  useEffect(() => {
+    if (value) {
+      onSubmit();
+    }
+  }, [value]);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    console.log(event, 'event')
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      onSubmit();
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl mt-[150px]">
       <h1 className="text-2xl font-serif mb-8 flex items-center text-gray-100 animate-fade-in">
@@ -51,6 +66,7 @@ export default function Welcome({onSubmit, onChange, value, setChatInput}: Props
             className="w-full p-[20px] pr-[50px] text-white bg-black border rounded-lg resize-none focus-visible:outline-none"
             rows={7}
             value={value}
+            onKeyDown={handleKeyDown}
             onChange={onChange}
             placeholder="Describe your topic..."
           />

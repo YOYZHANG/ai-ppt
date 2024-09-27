@@ -13,6 +13,7 @@ import { ArtifactView } from './artifact-view'
 import { ArtifactSchema } from '@/lib/schema'
 import { ExecutionResult } from '@/app/api/sandbox/route'
 import { toast } from 'react-toastify'
+import { ShareDialog } from './share-dialog'
 
 interface SideViewProps {
   isLoading:boolean,
@@ -30,14 +31,17 @@ export default function SideView({
   artifact
 
 }: SideViewProps) {
-  const [iframeKey, setIframeKey] = useState(0)
+  const [isShareDialogOpen, setShareDialogOpen] = useState(false)
 
   if (!artifact) {
     return null
   }
 
-  function share(url: string) {
-    window.open(`${window.location.origin}/${url}`, '_blank', 'noopener,noreferrer');
+  function share() {
+    if (!result?.url) {
+      toast.error('link not exist')
+    }
+    setShareDialogOpen(true)
   }
 
   function copy (content: string) {
@@ -65,6 +69,7 @@ export default function SideView({
 
   return (
     <div className="flex-1 flex flex-col shadow-2xl rounded-lg border max-w-[800px] bg-popover">
+      <ShareDialog open={isShareDialogOpen} setOpen={setShareDialogOpen} url={result?.url}></ShareDialog>
       <Tabs
         value={selectedTab}
         onValueChange={(value) => onSelectedTabChange(value as 'code' | 'artifact')}
@@ -91,7 +96,7 @@ export default function SideView({
                 <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Copy URL' onClick={() => copy(artifact.code || '')}>
                   <Copy className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Share' onClick={() => share(result.url)}>
+                <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Share' onClick={() => share()}>
                   <Share2 className="h-4 w-4" />
                 </Button>
               </>
@@ -111,7 +116,7 @@ export default function SideView({
               <TabsContent value="artifact" className="flex-1 w-full flex flex-col items-start justify-start">
                 {result &&
                   <ArtifactView
-                    iframeKey={iframeKey}
+                    iframeKey={0}
                     result={result}
                   />
                 }

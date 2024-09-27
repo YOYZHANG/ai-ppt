@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
 
 interface Props {
   session: Session | null,
@@ -33,7 +34,7 @@ export function User({ session, signOut, showLogin }: Props) {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel className="text-center truncate">
-            <Button variant="ghost" size="icon" className="w-full h-full text-sm font-medium justify-start hover:text-gray-400" onClick={showLogin}>
+            <Button variant="ghost" size="icon" className="w-full h-full text-sm font-medium justify-start hover:text-gray-400" onClick={signOut}>
               Sign Out
             </Button>
           </DropdownMenuLabel>
