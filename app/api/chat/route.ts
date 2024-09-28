@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     system: `
       Generate a visually appealing reveal.js presentation in HTML.
       The presentation should include the following slides: appealing cover, bullet points with links, conclusion and end page.
-      more than 6 slides. slides can use fit css style and animate effect.
+      more than 6 slides.
       use the template: ${htmlTemplate}
     `,
     messages

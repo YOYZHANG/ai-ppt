@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from './ui/textarea';
 
 const Lint = [
-  "Create a PPT on how ChatGPT works and limitations.",
+  "Create a PPT on how ChatGPT works.",
   "Generate a PPT explaining the API integration of ChatGPT in web applications, including key steps and practical examples.",
   "Compares ChatGPT with other conversational AI models, such as Gemini, in terms of architecture and performance."
 ]
