@@ -19,7 +19,6 @@ interface SideViewProps {
   isLoading:boolean,
   selectedTab: 'code' | 'artifact'
   onSelectedTabChange: Dispatch<SetStateAction<"code" | "artifact">>
-  result?: ExecutionResult,
   artifact?: Partial<ArtifactSchema>
 }
 
@@ -27,7 +26,6 @@ export default function SideView({
   isLoading,
   selectedTab,
   onSelectedTabChange,
-  result,
   artifact
 
 }: SideViewProps) {
@@ -37,12 +35,9 @@ export default function SideView({
     return null
   }
 
-  function share() {
-    if (!result?.url) {
-      toast.error('link not exist')
-    }
-    setShareDialogOpen(true)
-  }
+  // function share() {
+  //   setShareDialogOpen(true)
+  // }
 
   function copy (content: string) {
     navigator.clipboard.writeText(content)
@@ -69,7 +64,7 @@ export default function SideView({
 
   return (
     <div className="flex-1 flex flex-col shadow-2xl rounded-lg border max-w-[800px] bg-popover">
-      <ShareDialog open={isShareDialogOpen} setOpen={setShareDialogOpen} url={result?.url}></ShareDialog>
+      {/* <ShareDialog open={isShareDialogOpen} setOpen={setShareDialogOpen} url={result?.url}></ShareDialog> */}
       <Tabs
         value={selectedTab}
         onValueChange={(value) => onSelectedTabChange(value as 'code' | 'artifact')}
@@ -83,12 +78,12 @@ export default function SideView({
           <div className='flex justify-center'>
             <TabsList className="px-1 py-0 border h-8">
               <TabsTrigger className="font-normal text-xs py-1 px-2" value="code">code</TabsTrigger>
-              <TabsTrigger disabled={!result} className="font-normal text-xs py-1 px-2" value="artifact">Preview</TabsTrigger>
+              <TabsTrigger disabled={!artifact} className="font-normal text-xs py-1 px-2" value="artifact">Preview</TabsTrigger>
             </TabsList>
           </div>
           <div className='flex items-center justify-end space-x-2'>
           {
-            result && (
+            artifact && (
               <>
                 <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Download Artifact' onClick={() => download(artifact.code || '')}>
                   <Download className="h-4 w-4" />
@@ -96,9 +91,9 @@ export default function SideView({
                 <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Copy URL' onClick={() => copy(artifact.code || '')}>
                   <Copy className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Share' onClick={() => share()}>
+                {/* <Button variant="ghost" className='h-8 rounded-md px-3 text-muted-foreground' title='Share' onClick={() => share()}>
                   <Share2 className="h-4 w-4" />
-                </Button>
+                </Button> */}
               </>
             )
           }
@@ -114,10 +109,9 @@ export default function SideView({
                 }
               </TabsContent>
               <TabsContent value="artifact" className="flex-1 w-full flex flex-col items-start justify-start">
-                {result &&
+                {artifact &&
                   <ArtifactView
-                    iframeKey={0}
-                    result={result}
+                    result={artifact?.code || ''}
                   />
                 }
               </TabsContent>

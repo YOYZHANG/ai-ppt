@@ -9,7 +9,7 @@ const filePath = '/home/user/slides.md'
 
 export const maxDuration = 60
 export type ExecutionResult = {
-  url: string
+  code: string
 }
 
 export async function POST(req: Request) {

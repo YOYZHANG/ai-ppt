@@ -1,18 +1,26 @@
 'use client'
 
-import { ExecutionResult } from "@/app/api/sandbox/route"
+import { useEffect, useState } from "react"
 
 interface ArtifactViewProps {
-  iframeKey: number
-  result: ExecutionResult
+  result: string
 }
 
 
 export function ArtifactView({
-  iframeKey,
   result,
 }: ArtifactViewProps) {
+
+  const [iframeKey, setIframeKey] = useState(0);
+
+  useEffect(() => {
+    setIframeKey(prevKey => prevKey + 1);
+  }, [result]);
+
   if (!result) return null
+
+  const encodedHTML = encodeURIComponent(result);
+  const dataURI = `data:text/html;charset=utf-8,${encodedHTML}`;
 
   return (
     <div className="w-full h-full">
@@ -21,7 +29,7 @@ export function ArtifactView({
         className="h-full w-full"
         sandbox="allow-forms allow-scripts allow-same-origin"
         loading="lazy"
-        src= {result.url}
+        src= {dataURI}
       />
     </div>
   )

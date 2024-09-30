@@ -26,7 +26,6 @@ export default function Home() {
   const [isAuthDialogOpen, setAuthDialog] = useState(false)
   const [isPriceDialogOpen, setPriceDialogOpen] = useState(false)
   const { session, apiKey } = useAuth(setAuthDialog, setAuthView)
-  const [result, setResult] = useState<ExecutionResult>()
 
   const { object, submit, isLoading, stop } = useObject({
     api: '/api/chat',
@@ -35,23 +34,6 @@ export default function Home() {
       if (error) {
         return
       }
-
-      const response = await fetch('/api/convertd', {
-        method: 'POST',
-        body: JSON.stringify({
-          artifact
-        })
-      })
-
-
-      const result = await response.json()
-
-      if (!result.url) {
-        toast.error('failed to preview revealjs ppt')
-        return
-      }
-
-      setResult(result)
       setCurrentTab('artifact')
       setIsPreviewLoading(false)
     }
@@ -162,7 +144,6 @@ export default function Home() {
           isLoading={isPreviewLoading}
           selectedTab={currentTab}
           onSelectedTabChange={setCurrentTab}
-          result={result}
           artifact={artifact}
         />
       </div>
