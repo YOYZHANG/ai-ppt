@@ -3,7 +3,8 @@
 [中文说明](/README_CN.md)
 
 ## ✨ Demo
-<video src="./public/demo.mp4" width="800" height="450"></video>
+[/public/demo.mp4](https://github.com/user-attachments/assets/d5a4b37a-553b-41b4-ba33-ad457d118311)
+
 Try it Online ⚡️:  [Revealjs AI](https://ppt.revealjs.online)
 
 ## 🚀 Getting Started
