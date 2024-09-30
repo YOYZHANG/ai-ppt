@@ -1,6 +1,8 @@
 <h1 align="center">欢迎来到 RevealJS AI 👋</h1>
 
 ## ✨ 示例
+<video src="./public/demo.mp4" width="800" height="450"></video>
+
 在线地址: ⚡️ [Revealjs AI](https://ppt.revealjs.online)
 
 

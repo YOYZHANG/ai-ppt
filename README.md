@@ -3,10 +3,8 @@
 [中文说明](/README_CN.md)
 
 ## ✨ Demo
-Try it Online ⚡️
-
-ppt.revealjs.online
-
+<video src="./public/demo.mp4" width="800" height="450"></video>
+Try it Online ⚡️:  [Revealjs AI](https://ppt.revealjs.online)
 
 ## 🚀 Getting Started
 
@@ -50,9 +48,8 @@ pnpm run dev
 Contributions, issues and feature requests are welcome. 😄<br />
 Feel free to check [issues page](https://github.com/YOYZHANG/ai-ppt/issues) if you want to contribute.<br />
 
-## Show your support
-
 Please ⭐️ this repository if this project helped you!
+
 
 ## 📝 License
 MIT License © 2024 YOYZHANG
