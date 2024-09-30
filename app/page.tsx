@@ -43,7 +43,14 @@ export default function Home() {
         })
       })
 
+
       const result = await response.json()
+
+      if (!result.url) {
+        toast.error('failed to preview revealjs ppt')
+        return
+      }
+
       setResult(result)
       setCurrentTab('artifact')
       setIsPreviewLoading(false)

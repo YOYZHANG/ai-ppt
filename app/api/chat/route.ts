@@ -28,11 +28,6 @@ export type LLMModelConfig = {
   maxTokens?: number
 }
 
-export const maxDuration = 60
-
-const rateLimitMaxRequests = 5
-const ratelimitWindow = '1m'
-
 interface Req {
   messages: CoreMessage[],
   userID: string,

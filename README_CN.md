@@ -4,10 +4,6 @@
 在线地址: ⚡️ [Revealjs AI](https://ppt.revealjs.online)
 
 
-<p align="center">
-  <img width="700" align="center" src="https://user-images.githubusercontent.com/9840435/60266022-72a82400-98e7-11e9-9958-f9004c2f97e1.gif" alt="demo"/>
-</p>
-
 ## 🚀 快速开始
 
 ### 安装依赖
@@ -35,8 +31,8 @@ pnpm run dev
 - [Stripe](https://stripe.com/docs/development) - Payment
 
 ## 感谢以下项目
-- [Gemini API](https://gemini.google.com/app) - AI Powered
 - [ai-artifacts](https://github.com/e2b-dev/ai-artifacts) - Reference
+- [Gemini API](https://gemini.google.com/app) - AI Powered
 
 ## ✍️ 作者
 
