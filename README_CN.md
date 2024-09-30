@@ -26,21 +26,21 @@ GEMINI_API_KEY=
 pnpm run dev
 ```
 
-## 技术栈
+## 💻 技术栈
 - [Nextjs](https://nextjs.org/docs) - Full Stack Development
 - [Tailwindcss](https://tailwindcss.com/) - CSS Engine
 - [Supabase](https://supabase.com/) - User OAuth
 - [Stripe](https://stripe.com/docs/development) - Payment
 
-## 感谢以下项目
+##  💗 感谢以下项目
 - [ai-artifacts](https://github.com/e2b-dev/ai-artifacts) - Reference
 - [Gemini API](https://gemini.google.com/app) - AI Powered
 
-## ✍️ 作者
+## 👤作者
 
 如果有任何疑问或技术上的交流，可以在 Twitter 或微信上联系我。
 
-👤 **YOYZHANG**
+**YOYZHANG**
 
 - twitter: [@alexu19049062](https://twitter.com/alexuzhang19049062)
 - 微信: whdxzxq
