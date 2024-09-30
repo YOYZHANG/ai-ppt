@@ -27,18 +27,18 @@ GEMINI_API_KEY=
 pnpm run dev
 ```
 
-## TechStack
+## 💻 TechStack
 - [Nextjs](https://nextjs.org/docs) - Full Stack Development
 - [Tailwindcss](https://tailwindcss.com/) - CSS Engine
 - [Supabase](https://supabase.com/) - User OAuth
 - [Stripe](https://stripe.com/docs/development) - Payment
 
-## Credit
+## 💗  Credit
 - [Gemini API](https://gemini.google.com/app) - AI Powered
 - [ai-artifacts](https://github.com/e2b-dev/ai-artifacts) - Reference
 
-## Author
- 👤 **YOYZHANG**
+## 👤 Author
+**YOYZHANG**
 
 - Twitter: [@alexu19049062](https://twitter.com/alexuzhang19049062)
 - Github: [@YOYZHANG](https://github.com/YOYZHANG)
@@ -49,11 +49,16 @@ pnpm run dev
 Contributions, issues and feature requests are welcome. 😄<br />
 Feel free to check [issues page](https://github.com/YOYZHANG/ai-ppt/issues) if you want to contribute.<br />
 
-Please ⭐️ this repository if this project helped you!
-
 
 ## 📝 License
 MIT License © 2024 YOYZHANG
 
 ---
 
+## Others
+
+Please ⭐️ this repository if this project helped you!
+
+Your appreciation is my greatest strength in updating content！
+
+<a href="https://www.buymeacoffee.com/zhangxiaoqian" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>

@@ -56,6 +56,7 @@ MIT License © 2024 YOYZHANG
 ## 👀 其他
 你的赞赏是我更新内容最大的功力：
 
+<a href="https://www.buymeacoffee.com/zhangxiaoqian" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 
 ---
