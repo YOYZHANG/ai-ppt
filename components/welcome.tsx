@@ -22,14 +22,7 @@ export default function Welcome({onSubmit, onChange, value, setChatInput}: Props
     setChatInput(lint)
   }
 
-  useEffect(() => {
-    if (value) {
-      onSubmit();
-    }
-  }, [value]);
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    console.log(event, 'event')
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       onSubmit();
