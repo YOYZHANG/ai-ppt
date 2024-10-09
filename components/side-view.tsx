@@ -11,9 +11,7 @@ import { Button } from "@/components/ui/button"
 import { CodeView } from './code-view'
 import { ArtifactView } from './artifact-view'
 import { ArtifactSchema } from '@/lib/schema'
-import { ExecutionResult } from '@/app/api/sandbox/route'
 import { toast } from 'react-toastify'
-import { ShareDialog } from './share-dialog'
 
 interface SideViewProps {
   isLoading:boolean,

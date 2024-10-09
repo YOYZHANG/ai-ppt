@@ -13,7 +13,6 @@ import {ArtifactSchema, artifactSchema } from '@/lib/schema'
 import { usePostHog } from 'posthog-js/react'
 import { supabase } from '@/lib/supabase'
 import { AuthDialog } from '@/components/auth-dialog'
-import { ExecutionResult } from './api/sandbox/route'
 import { PriceDialog } from '@/components/price-dialog'
 import { toast } from 'react-toastify'
 
